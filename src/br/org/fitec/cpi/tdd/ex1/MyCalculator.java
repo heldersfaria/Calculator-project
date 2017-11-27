@@ -12,7 +12,6 @@ package br.org.fitec.cpi.tdd.ex1;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.BiFunction;
 
@@ -32,7 +31,7 @@ public class MyCalculator implements Calculator {
 
 			String[] arrrayString = string.split(",");
 
-			List<String> listaNegativos = new ArrayList<>();
+			List<String> negativesList = new ArrayList<>();
 
 			for (String number : arrrayString) {
 
@@ -45,7 +44,7 @@ public class MyCalculator implements Calculator {
 						Double parsedNumber = Double.parseDouble(number);
 
 						if (parsedNumber < 0) {
-							listaNegativos.add(number);
+							negativesList.add(number);
 						}
 
 						if (parsedNumber <= 1000) {
@@ -62,14 +61,14 @@ public class MyCalculator implements Calculator {
 				}
 			}
 
-			if (listaNegativos.size() == 1) {
+			if (negativesList.size() == 1) {
 				throw new NegativeNumberException("negatives not allowed");
-			} else if (listaNegativos.size() > 1) {
+			} else if (negativesList.size() > 1) {
 
 				StringJoiner joiner = new StringJoiner(" ");
 				joiner.add("negatives not allowed");
 
-				for (String negativos : listaNegativos) {
+				for (String negativos : negativesList) {
 					joiner.add(negativos);
 				}
 
@@ -119,5 +118,4 @@ public class MyCalculator implements Calculator {
 	private Double aproximate(Double value) {
 		return Double.parseDouble(value.toString().substring(0, value.toString().indexOf(".") + 2));
 	}
-
 }
