@@ -10,8 +10,6 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -37,9 +35,9 @@ public class MyCalculator implements Calculator {
 
 		List<String> listaNegativos = new ArrayList<>();
 
-		for (int i = 0; i < arrrayString.length; i++) {
+		for (String number : arrrayString) {
 
-			String number = arrrayString[i].trim();
+			number = number.trim();
 
 			if (!isEmpty(number)) {
 
@@ -82,12 +80,6 @@ public class MyCalculator implements Calculator {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		StringJoiner joiner = new StringJoiner(" ");
-		joiner.add("asfasfs");
-		System.out.println(joiner.toString());
-	}
-
 	@Override
 	public Integer add(String string) {
 		return basicOperation(string, (Double a, Double b) -> a + b).intValue();
@@ -107,6 +99,7 @@ public class MyCalculator implements Calculator {
 	public Double divide(String string) {
 
 		BiFunction<Double, Double, Number> function = (Double a, Double b) -> {
+
 			if (b == 0.0) {
 				throw new DivisionByZero("division by zero");
 			}
@@ -124,6 +117,20 @@ public class MyCalculator implements Calculator {
 	}
 
 	private Double aproximate(Double value) {
-		return new BigDecimal(value).setScale(1, RoundingMode.FLOOR).doubleValue();
+
+		if (value == null || value == 0.0) {
+			return value;
+		}
+
+
+		return Double.parseDouble(value.toString().substring(0, value.toString().indexOf(".") + 2));
+
+	}
+
+	public static void main(String[] args) {
+		Double valor = 3.08385374;
+
+		System.out.println(valor.toString());
+
 	}
 }

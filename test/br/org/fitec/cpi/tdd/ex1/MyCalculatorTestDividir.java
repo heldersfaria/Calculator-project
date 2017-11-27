@@ -86,6 +86,22 @@ public class MyCalculatorTestDividir {
 	}
 
 	@Test
+	public void divide2itensResultadoSomaDosDoisComDizima() {
+		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1")));
+		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1")));
+		Assert.assertThat(0.0, equalTo(myCalculator.divide("1,25")));
+		Assert.assertThat(1.3, equalTo(myCalculator.divide("4,3")));
+		
+	}
+	
+
+	@Test
+	public void comFracao() {
+		Assert.assertThat(2.2, equalTo(myCalculator.divide("3.4,1.5")));
+		Assert.assertThat(10.1, equalTo(myCalculator.divide("091.667328,9")));
+	}
+
+	@Test
 	public void divideByZeroTest1() {
 		thrown.expect(DivisionByZero.class);
 		myCalculator.divide("1,0");
@@ -112,6 +128,10 @@ public class MyCalculatorTestDividir {
 	@Test
 	public void divideSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1,2")));
+		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
+		Assert.assertThat(0.1, equalTo(myCalculator.divide("1,2,3")));
+		
+		Assert.assertThat(0.4, equalTo(myCalculator.divide("100,250,0.92")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
 		Assert.assertThat(0.1, equalTo(myCalculator.divide("1,2,3")));
 	}
