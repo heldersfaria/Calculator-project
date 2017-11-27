@@ -116,6 +116,12 @@ public class MyCalculatorTest {
 	}
 
 	@Test
+	public void addStringVazia2ResultadoUnicoValos() {
+		thrown.expectMessage(is("negatives not allowed"));
+		myCalculator.add(", -1 , ");
+	}
+	
+	@Test
 	public void add4valores() {
 		Assert.assertThat(10, equalTo(myCalculator.add("1 , 2 , 3, 4")));
 		Assert.assertThat(8, equalTo(myCalculator.add("1 ,  , 3, 4")));
@@ -134,7 +140,7 @@ public class MyCalculatorTest {
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
-		thrown.expectMessage(is("negatives not allowed -1 -3 "));
+		thrown.expectMessage(is("negatives not allowed -1 -3"));
 		myCalculator.add("-1,-3");
 	}
 
@@ -144,8 +150,15 @@ public class MyCalculatorTest {
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
 		thrown.expectMessage(containsString("-5"));
-		thrown.expectMessage(is("negatives not allowed -1 -3  -5 "));
+		thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
 		myCalculator.add("-1,-3, -5");
+	}
+	 
+	@Test
+	public void substractNumberFormatException(){
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
+		myCalculator.add("-1,asdfsdf");
 	}
 
 	@Test

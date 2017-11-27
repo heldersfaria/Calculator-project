@@ -134,7 +134,7 @@ public class MyCalculatorTestSubtrair {
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
-		thrown.expectMessage(is("negatives not allowed -1 -3 "));
+		thrown.expectMessage(is("negatives not allowed -1 -3"));
 		myCalculator.substract("-1,-3");
 	}
 
@@ -143,7 +143,7 @@ public class MyCalculatorTestSubtrair {
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
-		thrown.expectMessage(is("negatives not allowed -1 -3 "));
+		thrown.expectMessage(is("negatives not allowed -1 -3"));
 		myCalculator.substract("-1,-3");
 	}
 
@@ -153,8 +153,16 @@ public class MyCalculatorTestSubtrair {
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
 		thrown.expectMessage(containsString("-5"));
-		thrown.expectMessage(is("negatives not allowed -1 -3  -5 "));
+		thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
 		myCalculator.substract("-1,-3, -5");
+	}
+	
+	
+	@Test
+	public void substractNumberFormatException(){
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
+		myCalculator.substract("-1,asdfsdf");
 	}
 
 	@Test

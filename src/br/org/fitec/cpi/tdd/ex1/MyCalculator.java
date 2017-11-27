@@ -10,6 +10,9 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
 import java.util.function.BiFunction;
 
 /**
@@ -33,24 +36,25 @@ public class MyCalculator implements Calculator {
 		}
 
 		String[] arrrayString = string.split(SEPARATOR);
-		boolean[] NegativeArrayString = new boolean[arrrayString.length];
- 
+
 		Double result = null;
 		int negativeNumbers = 0;
-
+		List<String> listaNegativos = new ArrayList<String>();
+		
 		for (int i = 0; i < arrrayString.length; i++) {
 
 			String number = arrrayString[i].trim();
-
+ 
 			if (!isEmpty(number)) {
 
 				try {
+					
 					Double parsedNumber = Double.parseDouble(number);
 
 					if (parsedNumber < 0) {
 						negativeNumbers++;
-						NegativeArrayString[i] = true;
-					}
+						listaNegativos.add(number);
+					} 
 
 					if (parsedNumber <= 1000) {
 
@@ -65,21 +69,19 @@ public class MyCalculator implements Calculator {
 				}
 			}
 		}
-
+ 
 		if (negativeNumbers == 1) {
 			throw new NegativeNumberException("negatives not allowed");
 		} else if (negativeNumbers > 1) {
 
-			StringBuilder sb = new StringBuilder("negatives not allowed ");
-
-			for (int i = 0; i < NegativeArrayString.length; i++) {
-
-				if (NegativeArrayString[i]) {
-					sb.append(arrrayString[i] + " ");
-				}
+			StringJoiner joiner = new StringJoiner(" ");
+			joiner.add("negatives not allowed");
+			
+			for (String negativos : listaNegativos) {
+				joiner.add(negativos);
 			}
-
-			throw new NegativeNumberException(sb.toString());
+			
+			throw new NegativeNumberException(joiner.toString());
 
 		}
 		return result;
