@@ -34,7 +34,7 @@ public class MyCalculator implements Calculator {
 
 		String[] arrrayString = string.split(SEPARATOR);
 		boolean[] NegativeArrayString = new boolean[arrrayString.length];
-
+ 
 		Double result = null;
 		int negativeNumbers = 0;
 
