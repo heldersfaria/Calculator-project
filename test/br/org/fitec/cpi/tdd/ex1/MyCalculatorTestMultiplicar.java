@@ -49,6 +49,14 @@ public class MyCalculatorTestMultiplicar {
 		Assert.assertThat(0.0, equalTo(myCalculator.multiply("")));
 	}
 
+	
+	@Test
+	public void addStringVaziaResultado02() {
+		Assert.assertThat(0.0, equalTo(myCalculator.multiply(",")));
+		Assert.assertThat(0.0, equalTo(myCalculator.multiply(",,,")));
+		Assert.assertThat(0.0, equalTo(myCalculator.multiply(", , , ")));
+	}
+	
 	@Test
 	public void divideStringNullaResultado0() {
 		Assert.assertThat(0.0, equalTo(myCalculator.multiply(null)));

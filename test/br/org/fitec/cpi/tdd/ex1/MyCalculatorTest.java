@@ -49,6 +49,13 @@ public class MyCalculatorTest {
 		Assert.assertThat(0, equalTo(myCalculator.add("")));
 	}
 	
+	@Test
+	public void addStringVaziaResultado02() {
+		Assert.assertThat(0, equalTo(myCalculator.add(",")));
+		Assert.assertThat(0, equalTo(myCalculator.add(",,,")));
+		Assert.assertThat(0, equalTo(myCalculator.add(", , , ")));
+	}
+	
 
 
 	@Test

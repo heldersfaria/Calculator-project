@@ -24,7 +24,7 @@ import org.junit.rules.ExpectedException;
 public class MyCalculatorTestSubtrair {
 
 	Calculator myCalculator;
-	
+
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
@@ -34,6 +34,13 @@ public class MyCalculatorTestSubtrair {
 	@Before
 	public void setUp() throws Exception {
 		myCalculator = new MyCalculator();
+	}
+
+	@Test
+	public void addStringVaziaResultado02() {
+		Assert.assertThat(0, equalTo(myCalculator.substract(",")));
+		Assert.assertThat(0, equalTo(myCalculator.substract(",,,")));
+		Assert.assertThat(0, equalTo(myCalculator.substract(", , , ")));
 	}
 
 	/**
@@ -100,6 +107,7 @@ public class MyCalculatorTestSubtrair {
 	public void subtrairSoma3itensResultadoDiferentes() {
 		Assert.assertNotEquals(myCalculator.substract("1,2"), myCalculator.substract("2,1"));
 	}
+
 	@Test
 	public void subtrairSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(-3, equalTo(myCalculator.substract("0,1,2")));
@@ -123,16 +131,16 @@ public class MyCalculatorTestSubtrair {
 	public void subtrair4valores() {
 		Assert.assertThat(-8, equalTo(myCalculator.substract("1 , 2 , 3, 4")));
 		Assert.assertThat(-6, equalTo(myCalculator.substract("1 ,  , 3, 4")));
-		Assert.assertThat(-8 , equalTo(myCalculator.substract("1 ,  , 3, 4, 2")));
+		Assert.assertThat(-8, equalTo(myCalculator.substract("1 ,  , 3, 4, 2")));
 	}
-	
+
 	@Test
-	public void substractNotAllowed(){
+	public void substractNotAllowed() {
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(is("negatives not allowed"));
 		myCalculator.substract("-1,3");
 	}
-	
+
 	@Test
 	public void notAllowed2() {
 		thrown.expect(NegativeNumberException.class);
@@ -160,21 +168,21 @@ public class MyCalculatorTestSubtrair {
 		thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
 		myCalculator.substract("-1,-3, -5");
 	}
-		
+
 	@Test
-	public void substractNumberFormatException(){
+	public void substractNumberFormatException() {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
 		myCalculator.substract("-1,asdfsdf");
 	}
 
 	@Test
-	public void substractNumberFormatException2(){
+	public void substractNumberFormatException2() {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage(is("It was not possible to parse -asdf1"));
 		myCalculator.substract("-asdf1,asdfsdf");
 	}
-	
+
 	@Test
 	public void substractBiggerThan1000() {
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,1002")));

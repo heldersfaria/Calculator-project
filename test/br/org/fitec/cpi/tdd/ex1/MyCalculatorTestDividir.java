@@ -54,6 +54,14 @@ public class MyCalculatorTestDividir {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide(null)));
 	}
 
+	
+	@Test
+	public void addStringVaziaResultado02() {
+		Assert.assertThat(0.0, equalTo(myCalculator.divide(",")));
+		Assert.assertThat(0.0, equalTo(myCalculator.divide(",,,")));
+		Assert.assertThat(0.0, equalTo(myCalculator.divide(", , , ")));
+	}
+	
 	@Test
 	public void divideStringUmUnicaEntradaResultadoRecebido() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0")));

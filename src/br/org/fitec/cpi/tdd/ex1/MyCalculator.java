@@ -12,6 +12,7 @@ package br.org.fitec.cpi.tdd.ex1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.function.BiFunction;
 
@@ -25,59 +26,58 @@ public class MyCalculator implements Calculator {
 
 	private Number basicOperation(String string, BiFunction<Double, Double, Number> function) {
 
-		if (isEmpty(string)) {
-			return 0.0;
-		}
-
-		String[] arrrayString = string.split(",");
-
 		Double result = null;
 
-		List<String> listaNegativos = new ArrayList<>();
+		if (!isEmpty(string)) {
 
-		for (String number : arrrayString) {
+			String[] arrrayString = string.split(",");
 
-			number = number.trim();
+			List<String> listaNegativos = new ArrayList<>();
 
-			if (!isEmpty(number)) {
+			for (String number : arrrayString) {
 
-				try {
+				number = number.trim();
 
-					Double parsedNumber = Double.parseDouble(number);
+				if (!isEmpty(number)) {
 
-					if (parsedNumber < 0) {
-						listaNegativos.add(number);
-					}
+					try {
 
-					if (parsedNumber <= 1000) {
+						Double parsedNumber = Double.parseDouble(number);
 
-						if (result != null) {
-							result = function.apply(result, parsedNumber).doubleValue();
-						} else {
-							result = parsedNumber;
+						if (parsedNumber < 0) {
+							listaNegativos.add(number);
 						}
+
+						if (parsedNumber <= 1000) {
+
+							if (result != null) {
+								result = function.apply(result, parsedNumber).doubleValue();
+							} else {
+								result = parsedNumber;
+							}
+						}
+					} catch (NumberFormatException e) {
+						throw new NumberFormatException("It was not possible to parse " + number);
 					}
-				} catch (NumberFormatException e) {
-					throw new NumberFormatException("It was not possible to parse " + number);
 				}
 			}
-		}
 
-		if (listaNegativos.size() == 1) {
-			throw new NegativeNumberException("negatives not allowed");
-		} else if (listaNegativos.size() > 1) {
+			if (listaNegativos.size() == 1) {
+				throw new NegativeNumberException("negatives not allowed");
+			} else if (listaNegativos.size() > 1) {
 
-			StringJoiner joiner = new StringJoiner(" ");
-			joiner.add("negatives not allowed");
+				StringJoiner joiner = new StringJoiner(" ");
+				joiner.add("negatives not allowed");
 
-			for (String negativos : listaNegativos) {
-				joiner.add(negativos);
+				for (String negativos : listaNegativos) {
+					joiner.add(negativos);
+				}
+
+				throw new NegativeNumberException(joiner.toString());
 			}
-
-			throw new NegativeNumberException(joiner.toString());
 		}
 
-		return result;
+		return result == null ? 0.0 : result;
 	}
 
 	@Override
@@ -117,20 +117,7 @@ public class MyCalculator implements Calculator {
 	}
 
 	private Double aproximate(Double value) {
-
-		if (value == null || value == 0.0) {
-			return value;
-		}
-
-
 		return Double.parseDouble(value.toString().substring(0, value.toString().indexOf(".") + 2));
-
 	}
 
-	public static void main(String[] args) {
-		Double valor = 3.08385374;
-
-		System.out.println(valor.toString());
-
-	}
 }
