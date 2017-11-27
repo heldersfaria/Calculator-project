@@ -50,11 +50,8 @@ public class MyCalculatorTestSubtrair {
 	@Test
 	public void subtrairStringUmUnicaEntradaResultadoRecebido() {
 		Assert.assertThat(0, equalTo(myCalculator.substract("0")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1")));
-
 		Assert.assertThat(2, equalTo(myCalculator.substract("2")));
-
 		Assert.assertThat(3, equalTo(myCalculator.substract("3")));
 	}
 
@@ -71,79 +68,54 @@ public class MyCalculatorTestSubtrair {
 
 	@Test
 	public void subtrairStringDiferenteResultado() {
-
 		Assert.assertNotEquals(1, equalTo(myCalculator.substract("0")));
-
 		Assert.assertNotEquals(2, equalTo(myCalculator.substract("1")));
-
 		Assert.assertNotEquals(3, equalTo(myCalculator.substract("2")));
-
 		Assert.assertNotEquals(4, equalTo(myCalculator.substract("3")));
 	}
 
 	@Test
 	public void subtrairSoma2itensResultadoSomaDosDois() {
 		Assert.assertThat(-1, equalTo(myCalculator.substract("0,1")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,0")));
-
 		Assert.assertThat(0, equalTo(myCalculator.substract("1,1")));
-
 		Assert.assertThat(-1, equalTo(myCalculator.substract("1,2")));
-
 	}
 
 	@Test
 	public void subtrairSoma3itensResultadoDiferente() {
 		Assert.assertNotEquals(0, equalTo(myCalculator.substract("0,1")));
 		Assert.assertNotEquals(2, equalTo(myCalculator.substract("0,1")));
-
 		Assert.assertNotEquals(0, equalTo(myCalculator.substract("1,0")));
 		Assert.assertNotEquals(2, equalTo(myCalculator.substract("1,0")));
-
 		Assert.assertNotEquals(2, equalTo(myCalculator.substract("1,1")));
-
 		Assert.assertNotEquals(3, equalTo(myCalculator.substract("1,2")));
 	}
 
 	@Test
 	public void subtrairSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(-3, equalTo(myCalculator.substract("0,1,2")));
-
 		Assert.assertThat(-1, equalTo(myCalculator.substract("1,0,2")));
-
 		Assert.assertThat(-2, equalTo(myCalculator.substract("1,1,2")));
-
 		Assert.assertThat(-4, equalTo(myCalculator.substract("1,2,3")));
 	}
 
 	@Test
 	public void subtrairStringVazia2ResultadoUnicoValor() {
 		Assert.assertThat(1, equalTo(myCalculator.substract(",1")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract(",1")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1, ")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,")));
-
 		Assert.assertThat(-1, equalTo(myCalculator.substract("1,2, ")));
-
 		Assert.assertThat(-1, equalTo(myCalculator.substract("1, , 2")));
-
 		Assert.assertThat(-1, equalTo(myCalculator.substract(" , 1 , 2")));
-
 	}
 
 	@Test
 	public void subtrair4valores() {
-
 		Assert.assertThat(-8, equalTo(myCalculator.substract("1 , 2 , 3, 4")));
-
 		Assert.assertThat(-6, equalTo(myCalculator.substract("1 ,  , 3, 4")));
-
 		Assert.assertThat(-8 , equalTo(myCalculator.substract("1 ,  , 3, 4, 2")));
-
 	}
 
 	@Test
@@ -164,7 +136,6 @@ public class MyCalculatorTestSubtrair {
 					&& e.getMessage().contains("negatives not allowed"));
 
 			Assert.assertTrue("negatives not allowed -1 -3 ".equals(e.getMessage()));
-
 		}
 	}
 
@@ -180,11 +151,8 @@ public class MyCalculatorTestSubtrair {
 
 	@Test
 	public void substractBiggerThan1000() {
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,1002")));
-
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,1001")));
-
 		Assert.assertThat(-999, equalTo(myCalculator.substract("1,1000")));
 	}
 

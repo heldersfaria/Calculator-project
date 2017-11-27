@@ -33,48 +33,48 @@ public class MyCalculator implements Calculator {
 		}
 
 		String[] arrrayString = string.split(SEPARATOR);
-		boolean[] arrayStringNegativo = new boolean[arrrayString.length];
+		boolean[] NegativeArrayString = new boolean[arrrayString.length];
 
 		Double result = null;
-		int numerosNegativos = 0;
+		int negativeNumbers = 0;
 
 		for (int i = 0; i < arrrayString.length; i++) {
 
-			String numero = arrrayString[i].trim();
+			String number = arrrayString[i].trim();
 
-			if (!isEmpty(numero)) {
+			if (!isEmpty(number)) {
 
 				try {
-					Double numeroConvertido = Double.parseDouble(numero);
+					Double parsedNumber = Double.parseDouble(number);
 
-					if (numeroConvertido < 0) {
-						numerosNegativos++;
-						arrayStringNegativo[i] = true;
+					if (parsedNumber < 0) {
+						negativeNumbers++;
+						NegativeArrayString[i] = true;
 					}
 
-					if (numeroConvertido <= 1000) {
+					if (parsedNumber <= 1000) {
 
 						if (result != null) {
-							result = function.apply(result, numeroConvertido).doubleValue();
+							result = function.apply(result, parsedNumber).doubleValue();
 						} else {
-							result = numeroConvertido;
+							result = parsedNumber;
 						}
 					}
 				} catch (NumberFormatException e) {
-					throw new NumberFormatException("It was not possible to parse " + numero);
+					throw new NumberFormatException("It was not possible to parse " + number);
 				}
 			}
 		}
 
-		if (numerosNegativos == 1) {
+		if (negativeNumbers == 1) {
 			throw new NegativeNumberException("negatives not allowed");
-		} else if (numerosNegativos > 1) {
+		} else if (negativeNumbers > 1) {
 
 			StringBuilder sb = new StringBuilder("negatives not allowed ");
 
-			for (int i = 0; i < arrayStringNegativo.length; i++) {
+			for (int i = 0; i < NegativeArrayString.length; i++) {
 
-				if (arrayStringNegativo[i]) {
+				if (NegativeArrayString[i]) {
 					sb.append(arrrayString[i] + " ");
 				}
 			}
