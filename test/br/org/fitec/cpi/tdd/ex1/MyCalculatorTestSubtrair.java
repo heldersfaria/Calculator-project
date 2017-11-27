@@ -97,6 +97,10 @@ public class MyCalculatorTestSubtrair {
 	}
 
 	@Test
+	public void subtrairSoma3itensResultadoDiferentes() {
+		Assert.assertNotEquals(myCalculator.substract("1,2"), myCalculator.substract("2,1"));
+	}
+	@Test
 	public void subtrairSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(-3, equalTo(myCalculator.substract("0,1,2")));
 		Assert.assertThat(-1, equalTo(myCalculator.substract("1,0,2")));
@@ -156,8 +160,7 @@ public class MyCalculatorTestSubtrair {
 		thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
 		myCalculator.substract("-1,-3, -5");
 	}
-	
-	
+		
 	@Test
 	public void substractNumberFormatException(){
 		thrown.expect(NumberFormatException.class);
@@ -165,6 +168,13 @@ public class MyCalculatorTestSubtrair {
 		myCalculator.substract("-1,asdfsdf");
 	}
 
+	@Test
+	public void substractNumberFormatException2(){
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse -asdf1"));
+		myCalculator.substract("-asdf1,asdfsdf");
+	}
+	
 	@Test
 	public void substractBiggerThan1000() {
 		Assert.assertThat(1, equalTo(myCalculator.substract("1,1002")));

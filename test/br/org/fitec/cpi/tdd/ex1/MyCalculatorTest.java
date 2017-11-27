@@ -48,6 +48,8 @@ public class MyCalculatorTest {
 	public void addStringVaziaResultado0() {
 		Assert.assertThat(0, equalTo(myCalculator.add("")));
 	}
+	
+
 
 	@Test
 	public void addStringNullaResultado0() {
@@ -159,6 +161,18 @@ public class MyCalculatorTest {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
 		myCalculator.add("-1,asdfsdf");
+	}
+	
+	@Test
+	public void subtrairSoma3itensResultadoDiferentes() {
+		Assert.assertEquals(myCalculator.add("1,2"), myCalculator.add("2,1"));
+	}
+	
+	@Test
+	public void substractNumberFormatException2(){
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse -asdf1"));
+		myCalculator.add("-asdf1,asdfsdf");
 	}
 
 	@Test
