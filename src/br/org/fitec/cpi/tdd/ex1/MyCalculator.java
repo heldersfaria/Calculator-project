@@ -16,8 +16,7 @@ import java.util.function.BiFunction;
  * 
  * Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
  * 
- * public static <T> List<Class<?>> getTypeArguments(Class<T> baseClass, Class<? extends T> childClass) {
- * @author helde
+ * @author helder
  *
  */
 public class MyCalculator implements Calculator {
@@ -27,9 +26,8 @@ public class MyCalculator implements Calculator {
 	private boolean isEmpty(String string) {
 		return "".equals(string) || string == null;
 	}
-	
-	private Number basicOperation(String string, BiFunction<Double, Double, Number> function)
-	{
+
+	private Number basicOperation(String string, BiFunction<Double, Double, Number> function) {
 		if (isEmpty(string)) {
 			return 0.0;
 		}
@@ -37,7 +35,7 @@ public class MyCalculator implements Calculator {
 		String[] arrrayString = string.split(SEPARATOR);
 		boolean[] arrayStringNegativo = new boolean[arrrayString.length];
 
-		Double result = 0.0;
+		Double result = null;
 		int numerosNegativos = 0;
 
 		for (int i = 0; i < arrrayString.length; i++) {
@@ -55,7 +53,12 @@ public class MyCalculator implements Calculator {
 					}
 
 					if (numeroConvertido <= 1000) {
-						result = function.apply(result, numeroConvertido).doubleValue();
+
+						if (result != null) {
+							result = function.apply(result, numeroConvertido).doubleValue();
+						} else {
+							result = numeroConvertido;
+						}
 					}
 				} catch (NumberFormatException e) {
 					throw new NumberFormatException("It was not possible to parse " + numero);
@@ -76,27 +79,41 @@ public class MyCalculator implements Calculator {
 				}
 			}
 
+			throw new NegativeNumberException(sb.toString());
+
 		}
 		return result;
 	}
-	
+
 	@Override
-	public Integer add(String string)  {
+	public Integer add(String string) {
 		return basicOperation(string, (Double a, Double b) -> a + b).intValue();
 	}
 
 	@Override
-	public Integer subtrair(String string) {
+	public Integer substract(String string) {
 		return basicOperation(string, (Double a, Double b) -> a - b).intValue();
 	}
 
 	@Override
-	public Double multiplicar(String string) {
+	public Double multiply(String string) {
 		return basicOperation(string, (Double a, Double b) -> a * b).doubleValue();
 	}
 
 	@Override
-	public Double dividir(String string) {
+	public Double divide(String string) {
+		//
+		// BiFunction<Double, Double, Number> function = (Double a, Double b) ->
+		// {
+		// if (b == 0.0) {
+		// throw new DivisionByZero("division by zero");
+		// }
+		//
+		// return ;
+		// };
+		//
+		// return basicOperation(string, function).doubleValue();
+
 		return basicOperation(string, (Double a, Double b) -> a / b).doubleValue();
 	}
 }
