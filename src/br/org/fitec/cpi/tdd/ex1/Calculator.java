@@ -11,5 +11,11 @@
 package br.org.fitec.cpi.tdd.ex1;
 
 public interface Calculator {
-	public int add(String s);
+	public Integer add(String s);
+
+	public Integer subtrair(String s);
+
+	public Double multiplicar(String s);
+
+	public Double dividir(String s);
 }

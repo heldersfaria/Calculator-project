@@ -10,11 +10,13 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
+import java.util.function.BiFunction;
+
 /**
  * 
  * Numbers bigger than 1000 should be ignored, so adding 2 + 1001 = 2
  * 
- * 
+ * public static <T> List<Class<?>> getTypeArguments(Class<T> baseClass, Class<? extends T> childClass) {
  * @author helde
  *
  */
@@ -22,17 +24,20 @@ public class MyCalculator implements Calculator {
 
 	private static final String SEPARATOR = ",";
 
-	@Override
-	public int add(String string)  {
-
+	private boolean isEmpty(String string) {
+		return "".equals(string) || string == null;
+	}
+	
+	private Number basicOperation(String string, BiFunction<Double, Double, Number> function)
+	{
 		if (isEmpty(string)) {
-			return 0;
+			return 0.0;
 		}
 
 		String[] arrrayString = string.split(SEPARATOR);
 		boolean[] arrayStringNegativo = new boolean[arrrayString.length];
 
-		int result = 0;
+		Double result = 0.0;
 		int numerosNegativos = 0;
 
 		for (int i = 0; i < arrrayString.length; i++) {
@@ -42,7 +47,7 @@ public class MyCalculator implements Calculator {
 			if (!isEmpty(numero)) {
 
 				try {
-					int numeroConvertido = Integer.parseInt(numero);
+					Double numeroConvertido = Double.parseDouble(numero);
 
 					if (numeroConvertido < 0) {
 						numerosNegativos++;
@@ -50,13 +55,11 @@ public class MyCalculator implements Calculator {
 					}
 
 					if (numeroConvertido <= 1000) {
-						result += numeroConvertido;
+						result = function.apply(result, numeroConvertido).doubleValue();
 					}
 				} catch (NumberFormatException e) {
 					throw new NumberFormatException("It was not possible to parse " + numero);
-
 				}
-
 			}
 		}
 
@@ -76,8 +79,24 @@ public class MyCalculator implements Calculator {
 		}
 		return result;
 	}
+	
+	@Override
+	public Integer add(String string)  {
+		return basicOperation(string, (Double a, Double b) -> a + b).intValue();
+	}
 
-	private boolean isEmpty(String string) {
-		return "".equals(string) || string == null;
+	@Override
+	public Integer subtrair(String string) {
+		return basicOperation(string, (Double a, Double b) -> a - b).intValue();
+	}
+
+	@Override
+	public Double multiplicar(String string) {
+		return basicOperation(string, (Double a, Double b) -> a * b).doubleValue();
+	}
+
+	@Override
+	public Double dividir(String string) {
+		return basicOperation(string, (Double a, Double b) -> a / b).doubleValue();
 	}
 }

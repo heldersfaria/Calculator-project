@@ -57,6 +57,17 @@ public class MyCalculatorTest {
 
 		Assert.assertThat(3, equalTo(myCalculator.add("3")));
 	}
+	
+	@Test
+	public void addStringUmUnicaEntradaComValoresFracionadosResultadoRecebido() {
+		Assert.assertThat(0, equalTo(myCalculator.add("0")));
+
+		Assert.assertThat(1, equalTo(myCalculator.add("1")));
+
+		Assert.assertThat(2, equalTo(myCalculator.add("2")));
+
+		Assert.assertThat(3, equalTo(myCalculator.add("3")));
+	}
 
 	@Test
 	public void addStringDiferenteResultado() {
