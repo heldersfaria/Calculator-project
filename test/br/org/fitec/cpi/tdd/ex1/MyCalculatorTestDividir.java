@@ -112,7 +112,7 @@ public class MyCalculatorTestDividir {
 	public void divideSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1,2")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
-		Assert.assertThat(0.2, equalTo(myCalculator.divide("1,2,3")));
+		Assert.assertThat(0.16, equalTo(myCalculator.divide("1,2,3")));
 	}
 
 	@Test
@@ -134,9 +134,9 @@ public class MyCalculatorTestDividir {
 
 	@Test
 	public void add4valores() {
-		Assert.assertThat(4.2, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
-		Assert.assertThat(8.3, equalTo(myCalculator.divide("100 , , 3, 4")));
-		Assert.assertThat(0.0, equalTo(myCalculator.divide("1 , , 3, 4, 2")));
+		Assert.assertThat(4.16, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
+		Assert.assertThat(8.33, equalTo(myCalculator.divide("100 , , 3, 4")));
+		Assert.assertThat(0.04, equalTo(myCalculator.divide("1 , , 3, 4, 2")));
 	}
 	//
 	// @Test
