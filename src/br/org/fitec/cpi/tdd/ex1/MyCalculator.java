@@ -25,18 +25,16 @@ import java.util.function.BiFunction;
  */
 public class MyCalculator implements Calculator {
 
-	private static final String SEPARATOR = ",";
-
 	private Number basicOperation(String string, BiFunction<Double, Double, Number> function) {
 
 		if (isEmpty(string)) {
 			return 0.0;
 		}
 
-		String[] arrrayString = string.split(SEPARATOR);
+		String[] arrrayString = string.split(",");
 
 		Double result = null;
-		int negativeNumbers = 0;
+
 		List<String> listaNegativos = new ArrayList<>();
 
 		for (int i = 0; i < arrrayString.length; i++) {
@@ -50,7 +48,6 @@ public class MyCalculator implements Calculator {
 					Double parsedNumber = Double.parseDouble(number);
 
 					if (parsedNumber < 0) {
-						negativeNumbers++;
 						listaNegativos.add(number);
 					}
 
@@ -68,9 +65,9 @@ public class MyCalculator implements Calculator {
 			}
 		}
 
-		if (negativeNumbers == 1) {
+		if (listaNegativos.size() == 1) {
 			throw new NegativeNumberException("negatives not allowed");
-		} else if (negativeNumbers > 1) {
+		} else if (listaNegativos.size() > 1) {
 
 			StringJoiner joiner = new StringJoiner(" ");
 			joiner.add("negatives not allowed");
@@ -85,6 +82,12 @@ public class MyCalculator implements Calculator {
 		return result;
 	}
 
+	public static void main(String[] args) {
+		StringJoiner joiner = new StringJoiner(" ");
+		joiner.add("asfasfs");
+		System.out.println(joiner.toString());
+	}
+
 	@Override
 	public Integer add(String string) {
 		return basicOperation(string, (Double a, Double b) -> a + b).intValue();
@@ -97,7 +100,7 @@ public class MyCalculator implements Calculator {
 
 	@Override
 	public Double multiply(String string) {
-		return basicOperation(string, (Double a, Double b) -> a * b).doubleValue();
+		return aproximate(basicOperation(string, (Double a, Double b) -> a * b).doubleValue());
 	}
 
 	@Override
@@ -113,14 +116,14 @@ public class MyCalculator implements Calculator {
 
 		Number number = basicOperation(string, function);
 
-		return aproximate(number.doubleValue(), 2);
+		return aproximate(number.doubleValue());
 	}
 
 	private boolean isEmpty(String string) {
 		return "".equals(string) || string == null;
 	}
 
-	private Double aproximate(Double value, int scale) {
-		return new BigDecimal(value).setScale(scale, RoundingMode.FLOOR).doubleValue();
+	private Double aproximate(Double value) {
+		return new BigDecimal(value).setScale(1, RoundingMode.FLOOR).doubleValue();
 	}
 }

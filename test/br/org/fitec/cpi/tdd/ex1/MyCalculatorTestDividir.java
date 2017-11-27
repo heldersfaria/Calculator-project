@@ -10,6 +10,7 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 
@@ -112,7 +113,7 @@ public class MyCalculatorTestDividir {
 	public void divideSoma3itensResultadoSomaDosDois() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1,2")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
-		Assert.assertThat(0.16, equalTo(myCalculator.divide("1,2,3")));
+		Assert.assertThat(0.1, equalTo(myCalculator.divide("1,2,3")));
 	}
 
 	@Test
@@ -134,48 +135,48 @@ public class MyCalculatorTestDividir {
 
 	@Test
 	public void add4valores() {
-		Assert.assertThat(4.16, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
-		Assert.assertThat(8.33, equalTo(myCalculator.divide("100 , , 3, 4")));
-		Assert.assertThat(0.04, equalTo(myCalculator.divide("1 , , 3, 4, 2")));
+		Assert.assertThat(4.1, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
+		Assert.assertThat(8.3, equalTo(myCalculator.divide("100 , , 3, 4")));
+		Assert.assertThat(0.0, equalTo(myCalculator.divide("1 , , 3, 4, 2")));
 	}
-	//
-	// @Test
-	// public void notAllowed(){
-	// thrown.expect(NegativeNumberException.class);
-	// thrown.expectMessage(is("negatives not allowed"));
-	// myCalculator.add("-1,3");
-	// }
-	//
-	// @Test
-	// public void notAllowed2() {
-	// thrown.expect(NegativeNumberException.class);
-	// thrown.expectMessage(containsString("-1"));
-	// thrown.expectMessage(containsString("-3"));
-	// thrown.expectMessage(is("negatives not allowed -1 -3"));
-	// myCalculator.add("-1,-3");
-	// }
-	//
-	// @Test
-	// public void notAllowed3() {
-	// thrown.expect(NegativeNumberException.class);
-	// thrown.expectMessage(containsString("-1"));
-	// thrown.expectMessage(containsString("-3"));
-	// thrown.expectMessage(containsString("-5"));
-	// thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
-	// myCalculator.add("-1,-3, -5");
-	// }
-	//
-	// @Test
-	// public void substractNumberFormatException(){
-	// thrown.expect(NumberFormatException.class);
-	// thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
-	// myCalculator.add("-1,asdfsdf");
-	// }
-	//
-	// @Test
-	// public void addBiggerThan1000() {
-	// Assert.assertThat(1, equalTo(myCalculator.add("1,1002")));
-	// Assert.assertThat(1, equalTo(myCalculator.add("1,1001")));
-	// Assert.assertThat(1001, equalTo(myCalculator.add("1,1000")));
-	// }
+
+	@Test
+	public void notAllowed() {
+		thrown.expect(NegativeNumberException.class);
+		thrown.expectMessage(is("negatives not allowed"));
+		myCalculator.divide("-1,3");
+	}
+
+	@Test
+	public void notAllowed2() {
+		thrown.expect(NegativeNumberException.class);
+		thrown.expectMessage(containsString("-1"));
+		thrown.expectMessage(containsString("-3"));
+		thrown.expectMessage(is("negatives not allowed -1 -3"));
+		myCalculator.divide("-1,-3");
+	}
+
+	@Test
+	public void notAllowed3() {
+		thrown.expect(NegativeNumberException.class);
+		thrown.expectMessage(containsString("-1"));
+		thrown.expectMessage(containsString("-3"));
+		thrown.expectMessage(containsString("-5"));
+		thrown.expectMessage(is("negatives not allowed -1 -3 -5"));
+		myCalculator.divide("-1,-3, -5");
+	}
+
+	@Test
+	public void substractNumberFormatException() {
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
+		myCalculator.divide("-1,asdfsdf");
+	}
+
+	@Test
+	public void addBiggerThan1000() {
+		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1002")));
+		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1001")));
+		Assert.assertThat(0.0, equalTo(myCalculator.divide("1,1000")));
+	}
 }
