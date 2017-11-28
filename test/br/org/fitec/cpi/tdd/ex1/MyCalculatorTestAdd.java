@@ -21,7 +21,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-public class MyCalculatorTest {
+public class MyCalculatorTestAdd {
 
 	Calculator myCalculator;
 
