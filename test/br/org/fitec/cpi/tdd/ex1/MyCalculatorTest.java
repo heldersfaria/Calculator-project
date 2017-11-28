@@ -62,7 +62,7 @@ public class MyCalculatorTest {
 	}
 
 	@Test
-	public void addSum2ItensWithResult() {
+	public void add2ItensWithResult() {
 		Assert.assertThat(1, equalTo(myCalculator.add("0,1")));
 		Assert.assertThat(1, equalTo(myCalculator.add("1,0")));
 		Assert.assertThat(2, equalTo(myCalculator.add("1,1")));

@@ -10,6 +10,8 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
@@ -116,6 +118,6 @@ public class MyCalculator implements Calculator {
 	}
 
 	private Double aproximate(Double value) {
-		return Double.parseDouble(value.toString().substring(0, value.toString().indexOf(".") + 2));
+		return new BigDecimal(value).setScale(1, RoundingMode.HALF_UP).doubleValue();
 	}
 }

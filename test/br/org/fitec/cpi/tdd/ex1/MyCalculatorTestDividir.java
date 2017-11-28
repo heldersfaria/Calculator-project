@@ -45,41 +45,20 @@ public class MyCalculatorTestDividir {
 	}
 
 	@Test
-	public void divideStringVaziaResultado0() {
+	public void divideWithEmptyParametersWithResult() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("")));
-	}
-
-	@Test
-	public void divideStringNullaResultado0() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide(null)));
-	}
-
-	
-	@Test
-	public void addStringVaziaResultado02() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide(",")));
 		Assert.assertThat(0.0, equalTo(myCalculator.divide(",,,")));
 		Assert.assertThat(0.0, equalTo(myCalculator.divide(", , , ")));
 	}
 	
 	@Test
-	public void divideStringUmUnicaEntradaResultadoRecebido() {
+	public void divideStringUniqueValueUsedWithResult() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1")));
 		Assert.assertThat(2.0, equalTo(myCalculator.divide("2")));
 		Assert.assertThat(3.0, equalTo(myCalculator.divide("3")));
-	}
-
-	@Test
-	public void divideStringUmUnicaEntradaComValoresFracionadosResultadoRecebido() {
-		Assert.assertThat(0.0, equalTo(myCalculator.divide("0")));
-		Assert.assertThat(1.0, equalTo(myCalculator.divide("1")));
-		Assert.assertThat(2.0, equalTo(myCalculator.divide("2")));
-		Assert.assertThat(3.0, equalTo(myCalculator.divide("3")));
-	}
-
-	@Test
-	public void divideStringDiferenteResultado() {
 		Assert.assertNotEquals(1.0, equalTo(myCalculator.divide("0")));
 		Assert.assertNotEquals(2.0, equalTo(myCalculator.divide("1")));
 		Assert.assertNotEquals(3.0, equalTo(myCalculator.divide("2")));
@@ -87,65 +66,49 @@ public class MyCalculatorTestDividir {
 	}
 
 	@Test
-	public void divide2itensResultadoSomaDosDois() {
+	public void divide2ItensWithResult() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,2")));
-	}
-
-	@Test
-	public void divide2itensResultadoSomaDosDoisComDizima() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1")));
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("1,25")));
 		Assert.assertThat(1.3, equalTo(myCalculator.divide("4,3")));
-		
-	}
-	
-
-	@Test
-	public void comFracao() {
-		Assert.assertThat(2.2, equalTo(myCalculator.divide("3.4,1.5")));
-		Assert.assertThat(10.1, equalTo(myCalculator.divide("091.667328,9")));
+		Assert.assertThat(2.3, equalTo(myCalculator.divide("3.4,1.5")));
+		Assert.assertThat(10.2, equalTo(myCalculator.divide("091.667328,9")));
 	}
 
 	@Test
-	public void divideByZeroTest1() {
+	public void divideByZeroTest() {
 		thrown.expect(DivisionByZero.class);
 		myCalculator.divide("1,0");
-	}
-
-	@Test
-	public void divideByZeroTest2() {
-		thrown.expect(DivisionByZero.class);
 		myCalculator.divide("1,0,2");
 	}
 
 	@Test
-	public void divideNumberFormatException2() {
+	public void c() {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage(is("It was not possible to parse -asdf1"));
 		myCalculator.divide("-asdf1,asdfsdf");
 	}
 
 	@Test
-	public void divideSimetriaResultadoDiferente() {
+	public void divideNotSimileOperation() {
 		Assert.assertNotEquals(myCalculator.divide("1,2"), myCalculator.divide("2,1"));
 	}
 
 	@Test
-	public void divideSoma3itensResultadoSomaDosDois() {
+	public void divide3itensWithResult() {
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("0,1,2")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
-		Assert.assertThat(0.1, equalTo(myCalculator.divide("1,2,3")));
-		
+		Assert.assertThat(0.2, equalTo(myCalculator.divide("1,2,3")));
 		Assert.assertThat(0.4, equalTo(myCalculator.divide("100,250,0.92")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,1,2")));
-		Assert.assertThat(0.1, equalTo(myCalculator.divide("1,2,3")));
+		Assert.assertThat(0.2, equalTo(myCalculator.divide("1,2,3")));
 	}
 
 	@Test
-	public void addStringVazia2ResultadoUnicoValor() {
+	public void divideWithEmptyValuesWithResult() {
 		Assert.assertThat(1.0, equalTo(myCalculator.divide(",1")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide(",1")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1, ")));
@@ -153,39 +116,27 @@ public class MyCalculatorTestDividir {
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1,2, ")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide("1, , 2")));
 		Assert.assertThat(0.5, equalTo(myCalculator.divide(" , 1 , 2")));
-	}
-
-	@Test
-	public void addStringVazia2ResultadoUnicoValos() {
-		thrown.expectMessage(is("negatives not allowed"));
-		myCalculator.divide(", -1 , ");
-	}
-
-	@Test
-	public void add4valores() {
-		Assert.assertThat(4.1, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
+		Assert.assertThat(4.2, equalTo(myCalculator.divide("100 , 2 , 3, 4")));
 		Assert.assertThat(8.3, equalTo(myCalculator.divide("100 , , 3, 4")));
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("1 , , 3, 4, 2")));
 	}
 
 	@Test
-	public void notAllowed() {
-		thrown.expect(NegativeNumberException.class);
+	public void divideWithEmptyValueAndInvalidValueWithException() {
 		thrown.expectMessage(is("negatives not allowed"));
-		myCalculator.divide("-1,3");
+		myCalculator.divide(", -1 , ");
 	}
 
 	@Test
-	public void notAllowed2() {
+	public void divideWithInvalidValueWithException() {
+		thrown.expect(NegativeNumberException.class);
+		thrown.expectMessage(is("negatives not allowed"));
+		myCalculator.divide("-1,3");
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
 		thrown.expectMessage(is("negatives not allowed -1 -3"));
 		myCalculator.divide("-1,-3");
-	}
-
-	@Test
-	public void notAllowed3() {
 		thrown.expect(NegativeNumberException.class);
 		thrown.expectMessage(containsString("-1"));
 		thrown.expectMessage(containsString("-3"));
@@ -195,14 +146,18 @@ public class MyCalculatorTestDividir {
 	}
 
 	@Test
-	public void substractNumberFormatException() {
+	public void divideWithUnparsedWithException() {
 		thrown.expect(NumberFormatException.class);
 		thrown.expectMessage(is("It was not possible to parse " + "asdfsdf"));
 		myCalculator.divide("-1,asdfsdf");
+		
+		thrown.expect(NumberFormatException.class);
+		thrown.expectMessage(is("It was not possible to parse -asdf1"));
+		myCalculator.divide("-asdf1,asdfsdf");
 	}
 
 	@Test
-	public void addBiggerThan1000() {
+	public void divideBiggerThan1000WithResult() {
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1002")));
 		Assert.assertThat(1.0, equalTo(myCalculator.divide("1,1001")));
 		Assert.assertThat(0.0, equalTo(myCalculator.divide("1,1000")));
